@@ -13,7 +13,7 @@
     "node-sass": "^4.9.0"
   },
   "dependencies": {
-    "dayjs": "^1.6.7",
+    "dayjs": "^1.6.9",
     "handlebars": "^4.0.11",
     "human-readable-time": "^0.3.0",
     "js-autocomplete": "^1.0.4",
