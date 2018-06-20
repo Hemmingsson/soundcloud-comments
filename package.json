@@ -1,0 +1,24 @@
+{
+  "name": "sc-comments-player",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "babel-core": "^6.26.3",
+    "node-sass": "^4.9.0"
+  },
+  "dependencies": {
+    "dayjs": "^1.6.7",
+    "handlebars": "^4.0.11",
+    "human-readable-time": "^0.3.0",
+    "js-autocomplete": "^1.0.4",
+    "sentinel-js": "0.0.4",
+    "snapsvg": "^0.5.1",
+    "underscore": "^1.9.1"
+  }
+}

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Comments</title>
+</head>
+
+<body>
+    <main>
+        <nav>
+            <div class="about">
+                <h1>Stalk Anyones<br> Comments on<br> SoundCloud</h1>
+            </div>
+            <div class="search">
+                <input type="search" name="user" placeholder="Search for soundcloud user...">
+            </div>
+        </nav>
+        <section class="comments">
+        </section>
+        <section class="player">
+            <div class="controlls">
+            </div>
+            <div class="progress">
+                <div class="time current"></div>
+                <div class="progressBar"></div>
+                <div class="time total"></div>
+            </div>
+            <a target="_blank" class="track">
+                <div class="cover"></div>
+                <div class="info">
+                    <div class="title"></div>
+                    <div class="artist"></div>
+                </div>
+            </a>
+        </section>
+    </main>
+
+    <script id="template-user" type="text/x-handlebars-template">
+    </script>
+
+
+    <script id="template-comment" type="text/x-handlebars-template">
+        <div class="comment" data-timestamp="{{timestamp}}" data-track="{{track_id}}">
+            <div class="play"></div>
+            <span class="text">{{text}}</span>
+            <span class="time">{{time}}</span>
+        </div>
+    </script>
+    <script type="text/javascript" src="index.js"></script>
+</body>
+
+</html>
