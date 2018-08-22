@@ -6,12 +6,86 @@ $font-mono: monospace;
 $font-display: 'Krona One', sans-serif;
 $spacer-small: 20px;
 $row-height: 50px;
+$play-width: 46px;
 
 @mixin break {
     @media (max-width: 700px) {
         @content;
     }
 }
+
+/* ==========================================================================
+   Animations
+   ========================================================================== */
+
+.--blink {
+    animation: blink .6s linear infinite;
+}
+
+@keyframes blink {
+    0% {
+        opacity: 1;
+    }
+    49% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+
+
+/* ==========================================================================
+   General
+   ========================================================================== */
+
+* {
+    line-height: 1;
+
+    box-sizing: border-box;
+    margin: 0;
+}
+
+body {
+    font-family: $font-mono;
+    font-size: calc(8px + .5vw);
+
+    display: flex;
+
+    height: 100vh;
+
+    background-color: white;
+
+    align-items: center;
+    justify-content: center;
+    @include break {
+        font-size: 12px;
+    }
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+
+    width: calc(70% + 100px);
+    height: calc(100% - 4vh);
+
+    border: $border-thin;
+    background-color: white;
+
+    @include break {
+        width: 100%;
+        height: 100%;
+    }
+}
+
+
+/* ==========================================================================
+   Auto Complete
+   ========================================================================== */
 
 .autocomplete-suggestions {
     position: absolute;
@@ -77,45 +151,11 @@ $row-height: 50px;
     background-size: 2px 2px;
 }
 
-* {
-    line-height: 1;
 
-    box-sizing: border-box;
-    margin: 0;
-}
+/* ==========================================================================
+   Search & About
+   ========================================================================== */
 
-body {
-    font-family: $font-mono;
-    font-size: calc(8px + .5vw);
-
-    display: flex;
-
-    height: 100vh;
-
-    background-color: white;
-
-    align-items: center;
-    justify-content: center;
-    @include break {
-        font-size: 12px;
-    }
-}
-
-main {
-    display: flex;
-    flex-direction: column;
-
-    width: calc(70% + 100px);
-    height: calc(100% - 4vh);
-
-    border: $border-thin;
-    background-color: white;
-
-    @include break {
-        width: 100%;
-        height: 100%;
-    }
-}
 
 nav {
     display: flex;
@@ -133,6 +173,8 @@ nav {
         }
     }
 }
+
+
 
 .about {
     font-family: $font-display;
@@ -184,6 +226,10 @@ nav {
     }
 }
 
+/* ==========================================================================
+   Comments List
+   ========================================================================== */
+
 .comments {
     overflow: scroll;
 
@@ -195,8 +241,6 @@ nav {
         }
     }
 }
-
-$play-width: 46px;
 
 .comment {
     font-family: $font-display;
@@ -284,24 +328,10 @@ $play-width: 46px;
     }
 }
 
-.--blink {
-    animation: blink .6s linear infinite;
-}
+/* ==========================================================================
+   Player
+   ========================================================================== */
 
-@keyframes blink {
-    0% {
-        opacity: 1;
-    }
-    49% {
-        opacity: 1;
-    }
-    50% {
-        opacity: 0;
-    }
-    100% {
-        opacity: 0;
-    }
-}
 
 .player {
     display: flex;
@@ -329,6 +359,8 @@ $play-width: 46px;
         min-width: $row-height * 1.5;
         height: 100%;
 
+        cursor: pointer;
+
         justify-content: center;
         align-items: center;
         &:before {
@@ -336,14 +368,13 @@ $play-width: 46px;
 
             text-align: center;
         }
-        cursor: pointer;
         .--play,
         .--pause {
             cursor: pointer;
         }
         &.--play:before {
             content: '►';
-            transform:translate(0,5%);
+            transform: translate(0,5%);
         }
         &.--pause:before {
             content: '▌▌';
@@ -352,6 +383,7 @@ $play-width: 46px;
     }
     .progress {
         position: relative;
+
         display: flex;
 
         width: 100%;
@@ -363,6 +395,9 @@ $play-width: 46px;
         flex-grow: 1;
         align-items: center;
         @extend .check-pattern;
+        @include break {
+            display: none;
+        }
         .progressBar {
             width: 100%;
             height: 100%;
@@ -373,8 +408,10 @@ $play-width: 46px;
         }
         .time {
             font-size: 1.2em;
-             pointer-events: none;
+
             position: absolute;
+
+            pointer-events: none;
             &.current {
                 left: 1em;
             }
@@ -396,6 +433,9 @@ $play-width: 46px;
 
         color: currentColor;
 
+        @include break {
+            border-left: $border-thin;
+        }
         flex-shrink: 0;
         &[href^='https://'] {
             cursor: alias;
