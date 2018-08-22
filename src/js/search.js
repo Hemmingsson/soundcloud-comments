@@ -10,11 +10,16 @@ const renderUser = function (item, search) {
 }
 const userSelected = function (e, term, item) {
   const id = item.getAttribute('data-id')
-  setInputValue(item.innerText)
+  // setInputValue(item.innerText)
   soundcloudRequest('users/' + id + '/comments').then(comments.append)
 }
 
 const searchSoundcloud = function (term, response) {
+  if (term.includes('https://soundcloud.com/')) {
+    response([])
+    return
+  }
+
   try { xhr.abort() } catch (e) {}
   soundcloudRequest('users/?q=' + term).then(function (data) {
     response(data)
@@ -31,11 +36,35 @@ const init = function () {
   const id = parsedUrl.searchParams.get('user')
   if (id) {
     soundcloudRequest('users/' + id + '/comments').then(comments.append)
-    soundcloudRequest('users/' + id).then(function (data) { setInputValue(data.username) })
+    soundcloudRequest('users/' + id).then(function (data) {
+      setInputValue(data.username + ' comments')
+      setTimeout(() => {
+        setInputValue('')
+      }, 2000)
+    })
   }
+
+  inputElm.addEventListener('input', function (e) {
+    console.log('--')
+    if (e.target.value.includes('https://soundcloud.com/')) {
+      console.log(e)
+      console.log('URL')
+
+      soundcloudRequest('resolve?url=' + e.target.value).then(function (data) {
+        console.log(data)
+        if (data.kind === 'user') {
+          soundcloudRequest('users/' + data.id + '/comments').then(comments.append)
+        } else {
+          console.log('NOT A USER PROFILE URL')
+        }
+      })
+    }
+  })
 
   new autoComplete({
     selector: 'input[name="user"]',
+    minChars: 1,
+    cache: false,
     source: searchSoundcloud,
     renderItem: renderUser,
     onSelect: userSelected
