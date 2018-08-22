@@ -336,21 +336,22 @@ $play-width: 46px;
 
             text-align: center;
         }
+        cursor: pointer;
         .--play,
         .--pause {
             cursor: pointer;
         }
         &.--play:before {
             content: '►';
+            transform:translate(0,5%);
         }
         &.--pause:before {
             content: '▌▌';
-            transform: scaleY(.8) translate(15%, -5%);
+            transform: scaleY(.8) translate(15%,-2%);
         }
     }
     .progress {
         position: relative;
-
         display: flex;
 
         width: 100%;
@@ -372,7 +373,7 @@ $play-width: 46px;
         }
         .time {
             font-size: 1.2em;
-
+             pointer-events: none;
             position: absolute;
             &.current {
                 left: 1em;
